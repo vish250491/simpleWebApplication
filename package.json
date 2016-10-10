@@ -14,7 +14,7 @@
     "connect-flash": "*",
     "express": "*",
     "express-session": "*",
-    "jade": "*",
+    "ejs": "*",
     "lodash": "*",
     "mysql": "*",
     "passport": "*",
