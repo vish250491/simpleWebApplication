@@ -105,8 +105,8 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', '
 
 		.when('/profile', {
 			title: 'Profile',
-			templateUrl: '/app/templates/profile.html',
-			controller: 'ProfileController',
+			templateUrl: '/app/templates/notes.html',
+			controller: 'NotesController',
 			resolve: {
 				loggedIn: checkLoggedIn
 			}
