@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="simpleWebApp">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title ng-bind="page.title"></title>
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body>
-        Hello Server working fine
+<body ng-controller="MainController">
+<header id="header">
+    <nav role="navigation" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target="#main-navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a ng-href="/" class="navbar-brand"></a>
+            </div>
+            <div id="main-navbar" class="collapse navbar-collapse">
+                <div class="row">
+                    <ul class="nav navbar-nav">
+                        <li  ng-if="loggedInUser"><a ng-href="/">Home</a></li>
+                        <li ng-if="!loggedInUser"><a ng-href="/login">Login/Register</a></li>
+                        <!--   <li ng-if="loggedInUser"><a ng-href="/profile">Profile</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div notification="notification" ng-show="notification.visible" class="notification text-center alert">
+        <p ng-bind-html="notification.message"></p>
+    </div>
+</div>
+<div ng-view class="site-wrapper"></div>
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/js/lodash.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/assets/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+<script type="text/javascript" src="/assets/js/angular-route.min.js"></script>
+<script type="text/javascript" src="/assets/js/angular-sanitize.min.js"></script>
+<script type="text/javascript" src="/assets/js/socket.js"></script>
+<!-- Controllers-->
+<script type="text/javascript" src="/app/controllers/MainCtrl.js"></script>
+<script type="text/javascript" src="/app/controllers/UserCtrl.js"></script>
+<script type="text/javascript" src="/app/controllers/ProfileCtrl.js"></script>
+<!-- Services-->
+<script type="text/javascript" src="/app/services/MainService.js"></script>
+<script type="text/javascript" src="/app/services/UserService.js"></script>
+<script type="text/javascript" src="/app/services/ValidationService.js"></script>
+<script type="text/javascript" src="/app/services/SocketService.js"></script>
+<!-- Everything else-->
+<script type="text/javascript" src="/app/app-directives.js"></script>
+<script type="text/javascript" src="/app/app-filters.js"></script>
+<script type="text/javascript" src="/app/app-routes.js"></script>
+<script type="text/javascript" src="/app/app-main.js"></script>
 </body>
 </html>
