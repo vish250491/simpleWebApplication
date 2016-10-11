@@ -1,7 +1,41 @@
-angular.module('NotesController', []).controller('NotesController', ["$scope", "$rootScope", "User", function($scope, $rootScope, User) {
+angular.module('NotesController', []).controller('NotesController', ["$scope", "$rootScope", "User","Notes", function($scope, $rootScope, User ,Notes) {
 
-	$scope.profileData = {
-		email: $rootScope.loggedInUser.email
+	$scope.notesDataArray=[];
+	$scope.profileData = $rootScope.loggedInUser;
+
+	var noteDefaultData={
+		subject:'',
+		body :'',
+		version :1,
+		userId :$scope.profileData.userId
 	};
+
+	$scope.noteFormData=angular.copy(noteDefaultData);
+
+	/*****************************************************************
+	 ***
+	 *** get Notes Data on controller load
+	 ***
+	 ******************************************************************/
+	 Notes.getNotes($scope.profileData.userId)
+		 .then(function (response) {
+		 $scope.notesDataArray=response;
+	 })
+	
+	$scope.addNotes=function () {
+		Notes.addNotes($scope.noteFormData)
+			.then(function (response) {
+				$scope.notesDataArray.push(response);
+				$scope.noteFormData=angular.copy(noteDefaultData);
+		})
+	}
+
+	$scope.deleteNotes=function (noteId) {
+		Notes.deleteNotes(noteId)
+			.then(function (response) {
+				$scope.notesDataArray.push(response);
+				$scope.noteFormData=angular.copy(noteDefaultData);
+			})
+	}
 	
 }]);

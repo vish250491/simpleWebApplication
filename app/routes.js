@@ -35,7 +35,7 @@ module.exports = function(app, express, server, io, passport, db) {
 
     }
 
-    require('./routes-data/api-routes.js')(app, express);
+    require('./routes-data/api-routes.js')(app, db,express);
     require('./routes-data/user-routes.js')(app, db, passport, utilities);
 
     /***

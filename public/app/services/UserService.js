@@ -23,7 +23,7 @@ angular.module('UserService', []).factory('User', function($http, $rootScope, $l
 			$http.post('/register', registrationFields).success(function(data) {
 				if (data.success == true) {
 					$rootScope.loggedInUser = data.user;
-					$location.path('/welcome');
+					$location.path('/profile');
 				} else {
 					$rootScope.$emit('notify', data);
 				}
