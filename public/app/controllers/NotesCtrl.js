@@ -1,4 +1,4 @@
-angular.module('NotesController', []).controller('NotesController', ["$scope", "$rootScope", "User","Notes", function($scope, $rootScope, User ,Notes) {
+angular.module('NotesController', []).controller('NotesController', ["$scope", "$rootScope", "User","Notes","User", function($scope, $rootScope, User ,Notes,User) {
 
 	$scope.notesDataArray=[];
 	$scope.editorEnabled = false;
@@ -61,6 +61,10 @@ angular.module('NotesController', []).controller('NotesController', ["$scope", "
 				 init();
 			 }
 			})
+	}
+
+	$scope.logout=function () {
+		User.logout();
 	}
 	
 }]);

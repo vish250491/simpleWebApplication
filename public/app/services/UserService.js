@@ -30,37 +30,16 @@ angular.module('UserService', []).factory('User', function($http, $rootScope, $l
 			});
 		},
 
-		forgotPassword : function(email) {
-			$http.post('/forgot-password', {
-				email: email
-			}).success(function(data) {
-				$rootScope.$emit('notify', data);
-			});
-		},
+		logout: function() {
+			$http.post('/logout').success(function(data) {
 
-		resetPassword : function(resetKey, email, newPassword) {
-			$http.post('/reset-password', {
-				resetKey: resetKey,
-				email: email,
-				newPassword: newPassword
-			}).success(function(data) {
-				$rootScope.$emit('notify', data);
-			});
-		},
-
-		changeUsername: function(newUsername) {
-			$http.post('/change-username', {
-				newUsername: newUsername
-			}).success(function(data) {
-				$rootScope.$emit('notify', data);
-			});
-		},
-
-		updateProfile: function(profileData) {
-			$http.post('/update-profile', profileData).success(function(data) {
-				$rootScope.$emit('notify', data);
+					$location.path('/');
+				
+			}).error(function() {
+				$rootScope.$emit('notify', { success: 0, message: "Something went wrong. Please try again." });
 			});
 		}
+
 
 	}
 
