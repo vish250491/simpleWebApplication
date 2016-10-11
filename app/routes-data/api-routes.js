@@ -60,5 +60,21 @@ module.exports = function (app, db, express) {
         });
 
     });
+
+
+    app.post('/saveNotes', function (req, res) {
+        var newNoteData = req.body;
+        db.notes.update(newNoteData,{
+            where: ["id = ?", newNoteData.id]
+        }).then(function (response) {
+            if (response) {
+                if(response=="1")
+                    res.json({success:true});
+                else
+                    res.json({success:false});
+            }
+        });
+
+    });
     
 }

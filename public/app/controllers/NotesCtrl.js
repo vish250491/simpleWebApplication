@@ -1,8 +1,9 @@
 angular.module('NotesController', []).controller('NotesController', ["$scope", "$rootScope", "User","Notes", function($scope, $rootScope, User ,Notes) {
 
 	$scope.notesDataArray=[];
-	$scope.profileData = $rootScope.loggedInUser;
+	$scope.editorEnabled = false;
 
+	$scope.profileData = $rootScope.loggedInUser;
 	var noteDefaultData={
 		subject:'',
 		body :'',
@@ -24,6 +25,26 @@ angular.module('NotesController', []).controller('NotesController', ["$scope", "
 	 })
 	}
 	init();
+
+	$scope.enableEditor = function(noteData) {
+		$scope.checkEditId=noteData.id;
+		$scope.editorEnabled = true;
+		$scope.editableBody = noteData.body;
+	};
+
+	$scope.disableEditor = function() {
+		$scope.editorEnabled = false;
+	};
+
+	$scope.save = function(noteData) {
+		Notes.saveNotes(noteData)
+			.then(function (response) {
+				if(response.success){
+					init();
+				}
+			})
+		$scope.disableEditor();
+	};
 	
 	$scope.addNotes=function () {
 		Notes.addNotes($scope.noteFormData)
@@ -31,7 +52,7 @@ angular.module('NotesController', []).controller('NotesController', ["$scope", "
 				$scope.notesDataArray.push(response);
 				$scope.noteFormData=angular.copy(noteDefaultData);
 		})
-	}
+	};
 
 	$scope.deleteNotes=function (noteId) {
 		Notes.deleteNotes(noteId)

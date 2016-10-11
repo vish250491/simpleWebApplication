@@ -2775,7 +2775,12 @@ select[multiple].input-lg,
   top: 25px; }
 .has-feedback label.sr-only ~ .form-control-feedback {
   top: 0; }
-
+.wrap-text{
+  white-space: nowrap;
+  width: 30em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .help-block {
   display: block;
   margin-top: 5px;

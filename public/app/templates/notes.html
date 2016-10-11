@@ -59,17 +59,25 @@
 				<th>Subject</th>
 				<th>Body</th>
 				<th>Version</th>
-				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
 			</thead>
 			<tbody>
 			<tr ng-repeat="note in notesDataArray">
-				<td class="mailbox-name"><b><a href="read-mail.html">{{note.subject}}</a></b></td>
-				<td class="mailbox-subject">{{note.body}}</td>
+				<td class="mailbox-name"><b>{{note.subject}}</b></td>
+				<td class="mailbox-subject" style="width:50%">
+					<div  ng-hide="editorEnabled && checkEditId==note.id"  ng-click="enableEditor(note)"><div class="wrap-text">{{note.body}}</div><i class="fa fa-pencil fa-lg" style="color:blue" aria-hidden="true" ng-click="enableEditor(note)"></i>
+					</div>
+					<div ng-show="editorEnabled && checkEditId==note.id">
+						<textarea ng-model="note.body" ng-show="editorEnabled" rows="2" cols="60"/>
+						<a href="#" ng-click="save(note)">Save</a>
+						or
+						<a href="#" ng-click="disableEditor()">Cancel</a>
+					</div>
+				</td>
 				<td class="mailbox-date">{{note.version}}</td>
-				<td><i class="fa fa-pencil" aria-hidden="true"></i></td>
-				<td><i class="fa fa-trash" aria-hidden="true" ng-click="deleteNotes(note.id)"></i></td>
+
+				<td><i class="fa fa-trash fa-lg" style="color:red" aria-hidden="true" ng-click="deleteNotes(note.id)"></i></td>
 
 			</tr>
 

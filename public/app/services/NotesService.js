@@ -24,6 +24,15 @@ angular.module('NotesService', []).factory('Notes', function($http, $rootScope, 
                 deffered.resolve(data);
             });
             return deffered.promise;
+        },
+
+        saveNotes :function(noteData) {
+            noteData.version=noteData.version+1;
+            var deffered = $q.defer();
+            $http.post('/saveNotes',noteData).success(function(data) {
+                deffered.resolve(data);
+            });
+            return deffered.promise;
         }
 
     }
