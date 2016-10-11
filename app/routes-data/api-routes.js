@@ -14,10 +14,9 @@ module.exports = function (app, db, express) {
             where: ["userId = ?", userId],
             raw: true
         }).then(function (notes) {
-            console.log('---------------',notes);
             if (notes) {
                 res.json(notes)
-            } 
+            }
 
         });
 
@@ -34,7 +33,6 @@ module.exports = function (app, db, express) {
                 db.notes.find({
                     where: ["userId = ?", newNoteData.userId]
                 }).then(function (notes) {
-                    console.log('-----notes-------',notes);
                     if (!notes) {
                         res.json(notes)
                     } else {
@@ -48,5 +46,19 @@ module.exports = function (app, db, express) {
 
     });
 
+    app.delete('/deleteNotes/:noteId', function (req, res) {
+        var noteId = req.params.noteId;
 
+        db.notes.destroy({
+            where: ["id = ?", noteId]
+        }).then(function (notes) {
+            if(notes=="1")
+                res.json({success:true});
+            else
+                res.json({success:false});
+
+        });
+
+    });
+    
 }

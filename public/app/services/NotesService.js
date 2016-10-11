@@ -18,9 +18,9 @@ angular.module('NotesService', []).factory('Notes', function($http, $rootScope, 
             return deffered.promise;
         } ,
 
-        deleteNotes: function(notedData) {
+        deleteNotes: function(noteId) {
             var deffered = $q.defer();
-            $http.post('/deleteNotes',notedData).success(function(data) {
+            $http.delete('/deleteNotes/'+noteId).success(function(data) {
                 deffered.resolve(data);
             });
             return deffered.promise;

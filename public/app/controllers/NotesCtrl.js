@@ -17,10 +17,13 @@ angular.module('NotesController', []).controller('NotesController', ["$scope", "
 	 *** get Notes Data on controller load
 	 ***
 	 ******************************************************************/
+	function init(){
 	 Notes.getNotes($scope.profileData.userId)
 		 .then(function (response) {
 		 $scope.notesDataArray=response;
 	 })
+	}
+	init();
 	
 	$scope.addNotes=function () {
 		Notes.addNotes($scope.noteFormData)
@@ -33,8 +36,9 @@ angular.module('NotesController', []).controller('NotesController', ["$scope", "
 	$scope.deleteNotes=function (noteId) {
 		Notes.deleteNotes(noteId)
 			.then(function (response) {
-				$scope.notesDataArray.push(response);
-				$scope.noteFormData=angular.copy(noteDefaultData);
+			 if(response.success){
+				 init();
+			 }
 			})
 	}
 	
