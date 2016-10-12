@@ -11,7 +11,7 @@ module.exports = function (app, db, express) {
         var userId = req.params.userId;
 
         db.notes.findAll({
-            where: ["userId = ?", userId],
+            where: ['"userId" = ?', userId],
             raw: true
         }).then(function (notes) {
             if (notes) {
@@ -31,7 +31,7 @@ module.exports = function (app, db, express) {
             }else{
 
                 db.notes.find({
-                    where: ["userId = ?", newNoteData.userId]
+                    where: ['"userId" = ?', newNoteData.userId]
                 }).then(function (notes) {
                     if (!notes) {
                         res.json(notes)

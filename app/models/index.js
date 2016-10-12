@@ -4,7 +4,8 @@ var fs        = require('fs')
     , lodash    = require('lodash')
     , db_config    = require('../../config').database
     , sequelize = new Sequelize(db_config.db_name, db_config.db_user, db_config.db_password, {
-    logging: false
+    logging: false,
+    dialect: 'postgres'
 })
     , db        = {}
 

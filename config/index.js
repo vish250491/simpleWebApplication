@@ -6,8 +6,8 @@ var config = {
 
     database: {
         db_name: 'simple_app_db',
-        db_user: 'root',
-        db_password: 'root'
+        db_user: 'postgres',
+        db_password: 'postgres'
     },
 
     site: {
