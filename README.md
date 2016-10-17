@@ -1,6 +1,9 @@
 # simpleWebApplication
 simple web application using SEAN (Sequelize , Express , AngularJS , Nodejs)
 
+#Pre Requisite
+Make sure that you have database named "simple_app_db" in your postgres server.
+
 #configuration of postgres:
      
  ```
